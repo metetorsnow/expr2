@@ -1,0 +1,66 @@
+﻿@page
+@model expr2.Pages.users.EditModel
+
+@{
+    ViewData["Title"] = "编辑用户信息";
+}
+
+<h1>编辑用户信息</h1>
+
+<h4>用户信息</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="User.userID" />
+            <div class="form-group">
+                <label asp-for="User.userID" class="control-label"></label>
+                <input asp-for="User.userID" class="form-control" />
+                <span asp-validation-for="User.userID" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="User.password" class="control-label"></label>
+                <input asp-for="User.password" class="form-control" />
+                <span asp-validation-for="User.password" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="User.name" class="control-label"></label>
+                <input asp-for="User.name" class="form-control" />
+                <span asp-validation-for="User.name" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="User.gender" class="control-label"></label>
+                <input asp-for="User.gender" class="form-control" />
+                <span asp-validation-for="User.gender" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="User.birthdate" class="control-label"></label>
+                <input asp-for="User.birthdate" class="form-control" />
+                <span asp-validation-for="User.birthdate" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="User.phone" class="control-label"></label>
+                <input asp-for="User.phone" class="form-control" />
+                <span asp-validation-for="User.phone" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="保存" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">回到列表</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

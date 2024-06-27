@@ -1,0 +1,65 @@
+﻿@page
+@model expr2.Pages.users.IndexModel
+
+@{
+    ViewData["Title"] = "用户管理";
+}
+
+<h1>用户管理</h1>
+
+<p>
+    <a asp-page="Create">创建新用户</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.user[0].userID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user[0].password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user[0].name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user[0].gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user[0].birthdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user[0].phone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.user) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.userID)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.birthdate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.userID">编辑</a> |
+                <a asp-page="./Delete" asp-route-id="@item.userID">删除</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

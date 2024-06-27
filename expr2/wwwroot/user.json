@@ -1,0 +1,38 @@
+[
+  {
+    "userID": "admin",
+    "password": "0000",
+    "name": "\u7BA1\u7406\u5458\u4E00\u53F7",
+    "gender": "\u7537",
+    "birthdate": "1980-05-15T00:00:00",
+    "phone": "12345678901",
+    "type": "admin"
+  },
+  {
+    "userID": "user02",
+    "password": "333",
+    "name": "\u666E\u901A\u7528\u6237\u4E8C\u53F7",
+    "gender": "\u7537",
+    "birthdate": "1992-11-30T00:00:00",
+    "phone": "12345678903",
+    "type": "user"
+  },
+  {
+    "userID": "user03",
+    "password": "666",
+    "name": "\u666E\u901A\u7528\u6237\u4E09\u53F7",
+    "gender": "\u5973",
+    "birthdate": "1985-02-25T00:00:00",
+    "phone": "12345678911",
+    "type": "user"
+  },
+  {
+    "userID": "aaa",
+    "password": "aaa",
+    "name": null,
+    "gender": null,
+    "birthdate": null,
+    "phone": null,
+    "type": "user"
+  }
+]

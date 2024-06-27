@@ -1,0 +1,60 @@
+﻿@page
+@model expr2.Pages.Stocks.CreateModel
+
+@{
+    ViewData["Title"] = "新建物品入库";
+}
+
+
+<h1>新建物品入库</h1>
+
+<h4>入库信息</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Stock.ItemId" class="control-label"></label>
+                <select asp-for="Stock.ItemId" class ="form-control" asp-items="ViewBag.ItemId"></select>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="Stock.PurchaseDate" class="control-label"></label>
+                <input asp-for="Stock.PurchaseDate" class="form-control" />
+                <span asp-validation-for="Stock.PurchaseDate" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="Stock.PurchaseQuantity" class="control-label"></label>
+                <input asp-for="Stock.PurchaseQuantity" class="form-control" />
+                <span asp-validation-for="Stock.PurchaseQuantity" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="Stock.UnitPrice" class="control-label"></label>
+                <input asp-for="Stock.UnitPrice" class="form-control" />
+                <span asp-validation-for="Stock.UnitPrice" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="Stock.TotalPrice" class="control-label"></label>
+                <input asp-for="Stock.TotalPrice" class="form-control" placeholder="若为空则自动计算"/>
+                <span asp-validation-for="Stock.TotalPrice" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <input type="submit" value="创建" class="btn btn-primary" />
+            </div>
+            <br/>
+        </form>
+    </div>
+</div>
+<br/>
+<div>
+    <a asp-page="Index">回到列表</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

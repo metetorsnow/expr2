@@ -1,0 +1,153 @@
+﻿@page
+@model expr2.Pages.Items.IndexModel
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h1>库存信息</h1>
+@if ((await AuthorizationService.AuthorizeAsync(User, "admin")).Succeeded)
+{
+    <p>
+        <a asp-page="Create">新建物品</a>
+    </p>
+}
+
+<form>
+    <p>
+        <select asp-for="CategoryId" asp-items="Model.Genres">
+            <option value="">所有类型</option>
+        </select>
+        <input type="text" asp-for="SearchString" />
+        <input type="submit" value="搜索" />
+    </p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].ItemId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].ItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].CategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].Origin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].Specification)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].ItemImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item[0].Amount)
+            </th>
+            @if ((await AuthorizationService.AuthorizeAsync(User, "admin")).Succeeded)
+            {
+                <th></th>
+            }
+            
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Item?.Any() ?? false)
+        {
+            foreach (var item in Model.Item)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ItemId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ItemName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Origin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Specification)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Model)
+                    </td>
+
+                    <td>
+                        <img src="~/images/@item.ItemImage" alt="暂无图片" width="40" onclick="openModal(this.src, this.alt)" />
+                        <script>
+                            var modal = document.getElementById("myModal");
+                            var modalImg = document.getElementById("img01");
+                            var captionText = document.getElementById("caption");
+
+                            function openModal(imgSrc, altText) {
+                                modal.style.display = "block";
+                                modalImg.src = imgSrc;
+                                captionText.innerHTML = altText;
+                            }
+
+                            var span = document.getElementsByClassName("close")[0];
+
+                            span.onclick = function () {
+                                modal.style.display = "none";
+                            }
+                        </script>
+
+                        <div id="myModal" class="modal">
+                            <span class="close">&times;</span>
+                            <img class="modal-content" id="img01">
+                            <div id="caption"></div>
+                        </div>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "admin")).Succeeded)
+                    {
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.ItemId">编辑</a> |
+                            <a asp-page="./Details" asp-route-id="@item.ItemId">详情</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.ItemId">删除</a>
+                        </td>
+                    }        
+                </tr>
+            }
+        
+        }
+        else
+		{
+			<tr>
+				<td colspan="8">暂无数据</td>
+			</tr>
+		}
+        
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.Item.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Item.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.Item.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    上一页
+</a>
+<a asp-page="./Index"
+   asp-route-pageIndex="@(Model.Item.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    下一页
+</a>

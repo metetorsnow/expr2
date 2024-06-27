@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+<style>
+    .btn-warning {
+        color: #fff;
+        background-color: #f0ad4e;
+        border-color: #eea236;
+    }
+
+        .btn-warning:hover {
+            color: #fff;
+            background-color: #ec971f;
+            border-color: #d58512;
+        }
+
+    .btn-sm {
+        padding: 2px 5px;
+        margin:0;
+        font-size: 24px;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+</style>
+<ul class="navbar-nav">
+    @if (User.Identity.IsAuthenticated) //判断是否登录
+    {
+        <li class="nav-item">
+            <h4 class="nav-link text-dark">欢迎你 @User.Identity?.Name!</h4>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-page="/logout">
+                <button type="submit" class="btn btn-warning btn-sm">注销</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-page="/login">登录</a>
+        </li>
+    }
+</ul>

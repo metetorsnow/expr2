@@ -1,0 +1,57 @@
+﻿@page
+@model expr2.Pages.users.DeleteModel
+
+@{
+    ViewData["Title"] = "删除用户";
+}
+
+<h1>删除</h1>
+
+<h3>❌</h3>
+<div>
+    <h4>用户信息</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.userID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.userID)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.password)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.password)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.gender)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.gender)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.birthdate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.birthdate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.phone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.phone)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="User.userID" />
+        <input type="submit" value="删除" class="btn btn-danger" /> |
+        <a asp-page="./Index">回到列表</a>
+    </form>
+</div>

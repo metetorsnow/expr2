@@ -1,0 +1,58 @@
+﻿@page
+@model expr2.Pages.Items.DeleteModel
+
+@{
+    ViewData["Title"] = "删除物品";
+}
+
+<h1>删除物品</h1>
+
+<h3>确认要删除吗❌</h3>
+<div>
+    <h4>物品信息</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.ItemName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.ItemName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.CategoryId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.CategoryId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.Origin)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.Origin)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.Specification)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.Specification)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.Model)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.Model)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Item.ItemImage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Item.ItemImage)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Item.ItemId" />
+        <input type="submit" value="删除" style="font-size:16px;" class="btn btn-danger" /> |
+        <a asp-page="./Index">回到列表</a>
+    </form>
+</div>

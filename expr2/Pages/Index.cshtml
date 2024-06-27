@@ -1,0 +1,28 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "主页";
+}
+
+<div class="text-center">
+    <br />
+    <br />
+    <br />
+    <h1 class="display-4">办公物品管理系统✍</h1>
+    <p>
+        <div id="currentTime"></div>
+    </p>
+</div>
+<script>
+    function updateTime() {
+        const now = new Date();
+        const formattedTime = now.toLocaleString("zh-cn");
+        document.getElementById('currentTime').textContent = formattedTime;
+    }
+
+    // 更新时间的函数每秒调用一次
+    setInterval(updateTime, 1000);
+
+    // 页面加载时立即更新时间
+    updateTime();
+</script>

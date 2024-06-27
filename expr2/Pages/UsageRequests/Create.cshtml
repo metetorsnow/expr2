@@ -1,0 +1,43 @@
+﻿@page
+@model expr2.Pages.UsageRequests.CreateModel
+
+@{
+    ViewData["Title"] = "领用申请";
+}
+
+<h1>领用申请</h1>
+
+<h4>申请信息</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UsageRequest.ItemId" class="control-label"></label>
+                <select asp-for="UsageRequest.ItemId" class ="form-control" asp-items="ViewBag.ItemId"></select>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="UsageRequest.Quantity" class="control-label"></label>
+                <input asp-for="UsageRequest.Quantity" class="form-control" />
+                <span asp-validation-for="UsageRequest.Quantity" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="UsageRequest.RequestedBy" class="control-label"></label>
+                <input asp-for="UsageRequest.RequestedBy" class="form-control" />
+                <span asp-validation-for="UsageRequest.RequestedBy" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="申请" class="btn btn-primary" />
+            </div>
+            <br />
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

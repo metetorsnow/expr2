@@ -1,0 +1,130 @@
+﻿@page
+@model expr2.Pages.UsageRequests.IndexModel
+
+@{
+    ViewData["Title"] = "物品出库";
+}
+<!-- Import style -->
+<link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
+<!-- Import Vue 3 -->
+<script src="//unpkg.com/vue@3"></script>
+<!-- Import component library -->
+<script src="//unpkg.com/element-plus"></script>
+
+<script lang="ts" setup>
+    const { ElNotification }=ElementPlus
+    const open4 = () => {
+        ElNotification({
+            title: '错误',
+            message: '库存不足,无法出库',
+            type: 'error',
+            duration: 2000
+        })
+    }
+    const open3 = () => {
+        ElNotification({
+            title: '成功',
+            message: '出库成功',
+            type: 'success',
+            duration: 2000
+        })
+    }
+
+</script>
+
+<h1>出库信息</h1>
+
+<p>
+    <form method="get">
+        <select asp-for="statusFilter" onchange="this.form.submit()">
+            <option value="申请">待确认</option>
+            <option value="确认">已领用</option>
+        </select>
+    </form>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UsageRequest[0].RequestId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsageRequest[0].ItemId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsageRequest[0].Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsageRequest[0].RequestedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsageRequest[0].RequestDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsageRequest[0].Status)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.UsageRequest?.Any() ?? false){
+            foreach (var item in Model.UsageRequest)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequestId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item.ItemName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequestedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequestDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                    <td>
+                    @if(item.Status=="申请"){
+                    
+                        <form method="post">
+                            <input type="hidden" name="RequestId" value="@item.RequestId" />
+                            <input type="submit" value="确认申请" class="btn btn-danger" />
+                        </form>
+                    
+                    }
+                    </td>
+                
+            </tr>
+        }
+    }
+        else
+        {
+            <tr>
+                <td colspan="8">暂无数据</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if ((int?)TempData["Message"] == 0)
+{
+    <script>
+        open4()
+    </script>
+}
+@if ((int?)TempData["Message"] == 1)
+{
+    <script>
+        open3()
+    </script>
+}
+
+
+

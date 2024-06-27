@@ -1,0 +1,71 @@
+﻿@page
+@model expr2.Pages.Stocks.IndexModel
+
+@{
+    ViewData["Title"] = "入库管理";
+}
+
+<h1>入库信息</h1>
+
+<p>
+    <a asp-page="Create">新建物品入库</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock[0].StockId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock[0].ItemId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock[0].PurchaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock[0].PurchaseQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock[0].UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock[0].TotalPrice)
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@if (Model.Stock?.Any() ?? false){
+    foreach (var item in Model.Stock) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item.ItemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchaseQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+
+        </tr>
+    }
+}
+    else
+		{
+			<tr>
+				<td colspan="8">暂无数据</td>
+			</tr>
+		}
+
+    </tbody>
+</table>
